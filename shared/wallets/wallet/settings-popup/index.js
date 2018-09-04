@@ -8,7 +8,6 @@ import {
   Icon,
   iconCastPlatformStyles,
   Text,
-  avatarCastPlatformStyles,
 } from '../../../common-adapters'
 import {
   collapseStyles,
@@ -66,12 +65,12 @@ const SettingsPopup = (props: Props) => {
       <Box2 direction="vertical" style={styles.sectionLabel}>
         <Text type="BodySmallSemibold">Identity</Text>
       </Box2>
-      <Box2 direction="horizontal" fullWidth={true} style={styles.accountBox}>
-        <Avatar
-          size={32}
-          style={avatarCastPlatformStyles(styles.avatar)}
-          username={props.isDefault ? props.user : ''}
-        />
+      <Box2 direction="horizontal" fullWidth={true} gap="tiny" style={styles.accountBox}>
+        {props.isDefault ? (
+          <Avatar size={32} username={props.user} />
+        ) : (
+          <Icon type="icon-placeholder-secret-user-32" style={{height: 32, width: 32}} />
+        )}
         <Box2 direction="vertical">
           <Text type="Body">
             {props.isDefault ? 'This is your default Keybase account.' : 'This is a secondary account.'}
@@ -132,9 +131,6 @@ const SettingsPopup = (props: Props) => {
 const styles = styleSheetCreate({
   accountBox: {
     marginBottom: globalMargins.medium,
-  },
-  avatar: {
-    marginRight: globalMargins.tiny,
   },
   deleteBox: {
     ...globalStyles.flexBoxRow,
